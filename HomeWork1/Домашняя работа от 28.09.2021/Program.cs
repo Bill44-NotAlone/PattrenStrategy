@@ -8,8 +8,11 @@ namespace Домашняя_работа_от_28._09._2021
     {
         static void Main(string[] args)
         {
+            IncorrectFractions.RepFan += RepfanConsole;
+
             Console.WriteLine(new IncorrectFractions(2).GetFraction());
-            Console.WriteLine(new IncorrectFractions(2, 3, 6).GetFraction()) ;
+            Console.WriteLine(new IncorrectFractions(2, 3).GetFraction());
+            Console.WriteLine(new IncorrectFractions(2, 3, 6).GetFraction());
             Console.WriteLine((new IncorrectFractions(5, 5) / new IncorrectFractions(6, 4)).GetFraction());
             Console.WriteLine((new IncorrectFractions(5, 5) + new IncorrectFractions(6, 4)).GetFraction());
             Console.WriteLine((new IncorrectFractions(5, 5) - new IncorrectFractions(6, 4)).GetFraction());
@@ -21,32 +24,34 @@ namespace Домашняя_работа_от_28._09._2021
 
             Console.WriteLine(incorrectFractions.ConvertingFractionsToDecimal());
             Console.WriteLine(incorrectFractions.GetADrSign());
-            Console.WriteLine(incorrectFractions.ReplacingAFraction(7, 8).GetFraction());
-            Console.WriteLine(incorrectFractions.GetTheIndexOfTheNumeratorAndDenominator(incorrectFractions, 1));
+            incorrectFractions = incorrectFractions.ReplacingAFraction(7, 8);
+            Console.WriteLine(incorrectFractions.GetFraction());
+            Console.WriteLine(incorrectFractions.GetTheIndexOfTheNumeratorAndDenominator(incorrectFractions, 0));
+        }
+        public static void RepfanConsole()
+        {
+            Console.WriteLine("Вы поменяли дробь!");
         }
     }
 
     public class IncorrectFractions
     {
-        private delegate void method();
-        private event method RepFan;
+        public delegate void method();
+        public static event method RepFan;
         private String fraction;
 
         //Ктрукторы
         public IncorrectFractions(double numerator)
         {
             this.fraction = (numerator + "/" + 1).ToString();
-            RepFan += ReplacingAFractionCons;
         }
         public IncorrectFractions(double numerator, double denominator)
         {
             this.fraction = (numerator + "/" + denominator).ToString();
-            RepFan += ReplacingAFractionCons;
         }
         public IncorrectFractions(double integer, double numerator, double denominator)
         {
             this.fraction = ((integer * denominator) + numerator + "/" + denominator).ToString();
-            RepFan += ReplacingAFractionCons;
         }
 
         //Задание 1
@@ -110,7 +115,7 @@ namespace Домашняя_работа_от_28._09._2021
         //Задание 3
         public String GetADrSign()
         {
-            if (this.fraction[0] != '-')
+            if (this.GetNumerator() * this.GetDenominator() > 0)
             {
                 return ("+");
             }
@@ -123,16 +128,10 @@ namespace Домашняя_работа_от_28._09._2021
             RepFan();
             return (new IncorrectFractions(numerator, denominator));
         }
-        public void ReplacingAFractionCons()
-        {
-            Console.WriteLine("Вы поменяли дробь!");
-        }
         //Задание 5 (неверно пока)
         public double GetTheIndexOfTheNumeratorAndDenominator(IncorrectFractions incorrectFractions, int index)
         {
-            List<double> fractions = new List<double> 
-                                    { Convert.ToDouble(incorrectFractions.fraction.Split("/")[0]), 
-                                      Convert.ToDouble(incorrectFractions.fraction.Split("/")[1]) };
+            List<double> fractions = new List<double> { this.GetNumerator(), this.GetDenominator() };
             return (fractions[index]);
         }
 
