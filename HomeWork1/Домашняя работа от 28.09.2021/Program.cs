@@ -8,7 +8,6 @@ namespace Домашняя_работа_от_28._09._2021
     {
         static void Main(string[] args)
         {
-            IncorrectFractions.RepFan += RepfanConsole;
 
             Console.WriteLine(new IncorrectFractions(2).GetFraction());
             Console.WriteLine(new IncorrectFractions(2, 3).GetFraction());
@@ -21,23 +20,31 @@ namespace Домашняя_работа_от_28._09._2021
 
             IncorrectFractions incorrectFractions = new IncorrectFractions(-3, 4);
 
+            incorrectFractions.RepFanN += RepfanConsoleN;
+            incorrectFractions.RepFanD += RepfanConsoleD;
 
             Console.WriteLine(incorrectFractions.ConvertingFractionsToDecimal());
             Console.WriteLine(incorrectFractions.GetADrSign());
-            incorrectFractions = incorrectFractions.ReplacingAFraction(7, 8);
+            incorrectFractions.NewNumerator(7);
+            incorrectFractions.NewDenominator(8);
             Console.WriteLine(incorrectFractions.GetFraction());
             Console.WriteLine(incorrectFractions.GetTheIndexOfTheNumeratorAndDenominator(incorrectFractions, 0));
         }
-        public static void RepfanConsole()
+        public static void RepfanConsoleN(IncorrectFractions incorrectFractions, double int2)
         {
-            Console.WriteLine("Вы поменяли дробь!");
+            Console.WriteLine($"Числитель {incorrectFractions.GetNumerator()} будет числом {int2}");
+        }
+        public static void RepfanConsoleD(IncorrectFractions incorrectFractions, double int2)
+        {
+            Console.WriteLine($"Знаменатель {incorrectFractions.GetDenominator()} будет числом {int2}");
         }
     }
 
     public class IncorrectFractions
     {
-        public delegate void method();
-        public static event method RepFan;
+        public delegate void matod(IncorrectFractions tish, double int1);
+        public event matod RepFanD;
+        public event matod RepFanN;
         private String fraction;
 
         //Ктрукторы
@@ -123,12 +130,17 @@ namespace Домашняя_работа_от_28._09._2021
         }
 
         //Задание 4
-        public IncorrectFractions ReplacingAFraction(double numerator, double denominator)
+        public void  NewNumerator(double numerator)
         {
-            RepFan();
-            return (new IncorrectFractions(numerator, denominator));
+            RepFanN(this, numerator);
+            this.fraction = (numerator + "/" + this.GetDenominator()).ToString();
         }
-        //Задание 5 (неверно пока)
+        public void  NewDenominator(double denominator)
+        {
+            RepFanD(this, denominator);
+            this.fraction = (this.GetNumerator() + "/" + denominator).ToString();
+        }
+        //Задание 5
         public double GetTheIndexOfTheNumeratorAndDenominator(IncorrectFractions incorrectFractions, int index)
         {
             List<double> fractions = new List<double> { this.GetNumerator(), this.GetDenominator() };
@@ -140,11 +152,11 @@ namespace Домашняя_работа_от_28._09._2021
         {
             return fraction;
         }
-        private double GetNumerator()
+        public double GetNumerator()
         {
             return (Convert.ToDouble(this.fraction.Split("/")[0]));
         }
-        private double GetDenominator()
+        public double GetDenominator()
         {
             return (Convert.ToDouble(this.fraction.Split("/")[1]));
         }
