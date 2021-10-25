@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace HomeWork2
 {
@@ -8,169 +7,183 @@ namespace HomeWork2
     {
         static void Main(string[] args)
         {
-            HROfficer hROfficer = new HROfficer("Илья", "Иванов", "Петрович", "Заведующий по кадровому отделу");
-            Sudent sudent1 = hROfficer.MakeSudent("Максим","Арчил","Гомиашвили", "13-В3");
-            Sudent sudent2 = hROfficer.MakeSudent("Нет", "НЕТ", "ИИИ НЕТ!", "13-В3");
-            sudent1.GetGroup();
-            Group group = hROfficer.MakeGroup();
-            group.SetName("14-B3");
-            group.Add(sudent1);
-            group.Add(sudent2);
-            group.CountGroup();
-            sudent2.Deduction(hROfficer);
-            group.CountGroup();
+            PersonnelOfficer personnelOfficer = new PersonnelOfficer();
+            Student stud1 = personnelOfficer.MakeStudent("Илья", "Васильевич", "Дробышевский");
+            Student stud2 = personnelOfficer.MakeStudent();
+            Student stud3 = personnelOfficer.MakeStudent();
+            Teacher teacher = personnelOfficer.MakeTeacher("Илья1", "Васильевич1", "Дробышевский1");
+
+            Group group = personnelOfficer.MakeGroup();
+            group.SetTeacher(teacher);
+            teacher.Lecture = 23;
+            teacher.Lectured();
+            group.NameGroup = "1-2П9";
+            group.AddStudent(stud1);
+            group.AddStudent(stud2);
+            group.AddStudent(stud3);
+
+            Console.WriteLine(stud1.GetAllFIO());
+            Console.WriteLine(stud2.GetGroup());
+            Console.WriteLine(group.GetNumber());
+            stud1.Deducted();
+            Console.WriteLine(group.GetNumber());
+            Console.WriteLine(teacher.Lecture);
+            Console.WriteLine(teacher.GetAllFIO());
+        }
+    }
+    public class Group
+    {
+        private string namegroup;
+        private Teacher teacher;
+        private List<Student> students = new List<Student>();
+
+        public void SetTeacher(Teacher teacher)
+        {
+            teacher.SetGroup(this);
+            this.teacher = teacher;
+        }
+        public void AddStudent(Student student)
+        {
+            this.students.Add(student);
+            student.group = this;
+        }
+
+        public string NameGroup
+        {
+            get
+            {
+                return (namegroup);
+            }
+            set
+            {
+                this.namegroup = value;
+                foreach (Student student in students) student.group = this;
+            }
+        }
+        public int GetNumber()
+        {
+            return (this.students.Count);
+        }
+        public void UpData()
+        {
+            try
+            {
+                foreach (Student student in students)
+                {
+                    if (student.studies == false) students.Remove(student);
+                }
+            }
+            catch { }
+        }
+        public List<Student> GroupList()
+        {
+            return (this.students);
         }
     }
 
-    public interface Sudents
+    public abstract class Human
     {
-        public string GetGroup();
-        public void Deduction(HROfficer hr);
-    }
-    public interface Teachers
-    {
-        public void GetPost();
-    }
+        private string name;
+        private string middlename;
+        private string surname;
 
-    public class FIO
-    {
-        public string surname;
-        public string name;
-        public string middleName;
-        public FIO(string surname, string name, string middleName)
+        public Human(string name = null, string middlename = null, string surname = null)
         {
-            this.surname = surname;
             this.name = name;
-            this.middleName = middleName;
+            this.surname = surname;
+            this.middlename = middlename;
+        }
+        public string GetAllFIO()
+        {
+            string[] fio = new string[] {this.middlename, this.surname};
+            string allfio = name;
+            foreach(string i in fio)
+            {
+                if (i != null)
+                {
+                    allfio = allfio+" "+ i;
+                }
+            }
+            return (allfio);
         }
     }
-    public abstract class GenInf1
+    public abstract class Workers : Human
     {
-        protected FIO fio;
-    }
+        public Workers(string name = null, string middlename = null, string surname = null) : base(name, middlename, surname) { }
+        private string post;
 
-    public class Sudent : GenInf1, Sudents
-    {
-        public bool valid;
-        public Group group;
-        public Sudent(string surname, string name, string middleName, string group)
+        public string Post
         {
-            this.fio = new FIO(surname, name, middleName);
-            this.group = new Group();
-            this.group.name = group;
-
-            this.valid = true;
-        }
-        public string GetGroup()
-        {
-            Console.WriteLine(this.group.name);
-            return (this.group.name);
-        }
-        public void Deduction(HROfficer hr)
-        {
-            this.valid = false;
-            hr.AppDataGroup(this.group,this);
-        }
-        public string GetFIO()
-        {
-            return(this.fio.name + " " + this.fio.middleName + " " + this.fio.surname);
-        }
-    }
-
-    public abstract class GenInf2 : GenInf1 , Teachers
-    {
-        protected string post;
-        public void GetPost()
-        {
-            Console.WriteLine(this.post);
+            get
+            {
+                return (post);
+            }
+            set
+            {
+                this.post = value;
+            }
         }
     }
 
-    public class Teacher : GenInf2
+    public class PersonnelOfficer : Workers
     {
-        public Teacher(string surname, string name, string middleName, string post)
+        public void AddStudent(Group group, Student student)
         {
-            this.fio = new FIO(surname, name, middleName);
-            this.post = post;
+            group.AddStudent(student);
         }
-        public void ReadLecture(Group group)
+        public Student MakeStudent(string name = null, string middlename = null, string surname = null)
         {
-            if (group.lecture != 0) group.lecture--;
+            return (new Student(name, middlename, surname));
         }
-    }
-    public class HROfficer : GenInf2
-    {
-        public HROfficer(string surname, string name, string middleName, string post)
+        public Teacher MakeTeacher(string name = null, string middlename = null, string surname = null)
         {
-            this.fio = new FIO(surname, name, middleName);
-            this.post = post;
-        }
-        public Teacher MakeTeacher(string surname, string name, string middleName, string post)
-        {
-            return(new Teacher(surname, name, middleName, post));
-        }
-        public Sudent MakeSudent(string surname, string name, string middleName, string group)
-        {
-            return (new Sudent(surname, name, middleName, group));
-        }
-        public void AppDataGroup(Group group, Sudent sudent)
-        {
-            if (sudent.group == group) group.Remove();
+            return (new Teacher(name, middlename, surname));
         }
         public Group MakeGroup()
         {
             return(new Group());
         }
     }
-    public class Group
+
+    public class Teacher : Workers
     {
-        private Teacher teacher;
-        public string name;
-        public int lecture;
-
-
-        private List<Sudent> group = new List<Sudent>();
-        public void Remove()
+        public Teacher(string name = null, string middlename = null, string surname = null) : base (name, middlename, surname) { }
+        private int lecture;
+        private Group group = null;
+        public int Lecture
         {
-            try
+            set
             {
-                foreach (Sudent sudent2 in group)
-                {
-                    if (sudent2.valid == false)
-                    {
-                        sudent2.group = null;
-                        group.Remove(sudent2);
-                    }
-                }
+                if(group != null) this.lecture = value;
             }
-            catch
+            get
             {
-                foreach (Sudent sudent2 in group)
-                {
-                    if (sudent2.valid == false)
-                    {
-                        sudent2.group = null;
-                        group.Remove(sudent2);
-                    }
-                }
+                return (this.lecture);
             }
         }
-        public void SetTeacher(Teacher teacher)
+        public void Lectured()
         {
-            this.teacher = teacher;
+            this.lecture--;
         }
-        public void SetName(string name)
+        public void SetGroup(Group group)
         {
-            this.name = name;
+            this.group = group;
         }
-        public void Add(Sudent sudent)
+    }
+    public class Student : Human
+    {
+        public Student(string name = null, string middlename = null, string surname = null) : base(name, middlename, surname) { }
+        public Group group;
+        public bool studies = true;
+
+        public string GetGroup()
         {
-            group.Add(sudent);
-            sudent.group = this;
+            return (this.group.NameGroup);
         }
-        public void CountGroup()
+        public void Deducted()
         {
-            foreach (Sudent sudent in group) Console.WriteLine(sudent.GetFIO() + " " + sudent.GetGroup());
+            this.studies = false;
+            group.UpData();
         }
     }
 }
