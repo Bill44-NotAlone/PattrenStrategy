@@ -29,6 +29,10 @@ namespace HomeWork2
             Console.WriteLine(group.GetNumber());
             Console.WriteLine(teacher.Lecture);
             Console.WriteLine(teacher.GetAllFIO());
+
+            teacher.Post = "Математик";
+            teacher.Post = "Физик";
+            Console.WriteLine(teacher.Post);
         }
     }
     public class Group
@@ -107,9 +111,9 @@ namespace HomeWork2
             return (allfio);
         }
     }
-    public abstract class Workers : Human
+    public abstract class Worker : Human
     {
-        public Workers(string name = null, string middlename = null, string surname = null) : base(name, middlename, surname) { }
+        public Worker(string name = null, string middlename = null, string surname = null) : base(name, middlename, surname) { }
         private string post;
 
         public string Post
@@ -120,12 +124,12 @@ namespace HomeWork2
             }
             set
             {
-                this.post = value;
+                if (this.post == null) this.post = value;
             }
         }
     }
 
-    public class PersonnelOfficer : Workers
+    public class PersonnelOfficer : Worker
     {
         public void AddStudent(Group group, Student student)
         {
@@ -145,7 +149,7 @@ namespace HomeWork2
         }
     }
 
-    public class Teacher : Workers
+    public class Teacher : Worker
     {
         public Teacher(string name = null, string middlename = null, string surname = null) : base (name, middlename, surname) { }
         private int lecture;
