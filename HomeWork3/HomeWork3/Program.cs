@@ -6,62 +6,56 @@ namespace HomeWork3
     {
         static void Main(string[] args)
         {
-            CollectionClass<string> collection = new CollectionClass<string>();
-            collection.Add("w");
-            collection.Add("w");
-            collection.Add("s");
-            collection.Add("3");
-            Console.WriteLine(collection.GetElement(0));
-            Console.WriteLine(collection.GetElement(1));
-            Console.WriteLine(collection.GetElement(2));
+            CollectionClass collection = new CollectionClass();
+            collection.Add(1);
+            collection.Add(2);
+            collection.Add(3);
+            collection.Add(4);
+            Console.WriteLine(collection.GetIndex(4));
         }
     }
 
-    class CollectionClass<Type>
+    class CollectionClass
     {
         class Collection
         {
-            public Type content;
+            public int content;
             public Collection NextCollection;
         }
-        Collection initialvalue;
-        public void Add(Type value)
+        Collection initialvalue = null;
+        
+        public void Add(int element)
         {
             Collection collection = new Collection();
-            collection.content = value;
-            if (initialvalue == null) 
+            collection.content = element;
+            if(initialvalue == null)
             {
                 initialvalue = collection;
                 return;
             }
-            while (initialvalue.NextCollection != null) initialvalue = initialvalue.NextCollection;
-            initialvalue.NextCollection = collection;
-        }
-        public Type GetElement(int index)
-        {
             Collection initialvalue1 = initialvalue;
-                for (int i = 0; i < index; i++)
-                {
-                    if (initialvalue1.NextCollection != null)
-                    {
-                        initialvalue1 = initialvalue1.NextCollection;
-                    }
-                }
-                return (initialvalue1.content);
-        }
-        public void RemoveAt(int index)
-        {
-            Collection initialvalue1 = initialvalue;
-            for (int i = 0; i < index -1 ; i++)
+            while (initialvalue1.NextCollection != null)
             {
-                if (initialvalue1.NextCollection != null)
-                {
-                    initialvalue1 = initialvalue1.NextCollection;
-                }
+                initialvalue1 = initialvalue1.NextCollection;
             }
-            Collection initialvalue2 = initialvalue1.NextCollection;
-            initialvalue1.NextCollection = initialvalue1.NextCollection.NextCollection;
-            initialvalue2.NextCollection = null;
+            initialvalue1.NextCollection = collection;
+            return;
         }
+        public int GetIndex(int element)
+        {
+            Collection initialvalue1 = initialvalue;
+            int i = 0;
+            while(element != initialvalue1.content)
+            {
+                if(initialvalue1.NextCollection == null)
+                {
+                    return (-1);
+                }
+                initialvalue1 = initialvalue1.NextCollection;
+                i = i + 1;
+            }
+            return (i);
+        }
+        //public int
     }
 }
