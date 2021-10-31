@@ -7,11 +7,14 @@ namespace HomeWork3
         static void Main(string[] args)
         {
             CollectionClass collection = new CollectionClass();
-            collection.Add(1);
-            collection.Add(2);
-            collection.Add(3);
-            collection.Add(4);
+            for (int i = 0; i < 16; i++) collection.Add(i + 1);
             Console.WriteLine(collection.GetIndex(4));
+            Console.WriteLine(collection.GetElement(14));
+
+            for (int i = 0; i < 16; i++) Console.Write(collection.GetElement(i));
+            collection.RemoveAt(5);
+            Console.WriteLine();
+            for (int i = 0; i < 15; i++) Console.Write(collection.GetElement(i));
         }
     }
 
@@ -56,6 +59,22 @@ namespace HomeWork3
             }
             return (i);
         }
-        //public int
+        public int GetElement(int index)
+        {
+            Collection initialvalue1 = initialvalue;
+            for (int i = 0; i < index; i++)
+            {
+                initialvalue1 = initialvalue1.NextCollection;
+            }
+            return (initialvalue1.content);
+        }
+        public void RemoveAt(int index)
+        {
+            Collection initialvalue1 = initialvalue;
+            for (int i = 0; i < index - 1; i++) initialvalue1 = initialvalue1.NextCollection;
+            Collection initialvalue2 = initialvalue1.NextCollection;
+            Collection initialvalue3 = initialvalue2.NextCollection;
+            initialvalue1.NextCollection = initialvalue3;
+        }
     }
 }
