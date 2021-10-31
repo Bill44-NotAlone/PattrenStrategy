@@ -45,84 +45,88 @@ namespace Домашняя_работа_от_28._09._2021
         public delegate void matod(IncorrectFractions tish, double int1);
         public event matod RepFanD;
         public event matod RepFanN;
-        private String fraction;
+        private double numerator;
+        private double denominator;
 
         //Ктрукторы
         public IncorrectFractions(double numerator)
         {
-            this.fraction = (numerator + "/" + 1).ToString();
+            this.numerator = numerator;
+            this.denominator = 1;
         }
         public IncorrectFractions(double numerator, double denominator)
         {
-            this.fraction = (numerator + "/" + denominator).ToString();
+            this.numerator = numerator;
+            this.denominator = denominator;
         }
         public IncorrectFractions(double integer, double numerator, double denominator)
         {
-            this.fraction = ((integer * denominator) + numerator + "/" + denominator).ToString();
+            this.numerator = integer * denominator + numerator;
+            this.denominator = denominator;
         }
 
         //Задание 1
         public double ConvertingFractionsToDecimal()
         {
-            return (this.GetNumerator() / this.GetDenominator());
+            return (this.numerator / this.denominator);
         }
 
         //Задание 2
         public static IncorrectFractions operator +(IncorrectFractions incorrectFractions1, IncorrectFractions incorrectFractions2)
         {
-            if (incorrectFractions1.GetDenominator() == incorrectFractions2.GetDenominator())
+            if (incorrectFractions1.denominator == incorrectFractions2.denominator)
             {
-                double commonNumerator = incorrectFractions1.GetNumerator() + incorrectFractions2.GetNumerator();
-                double commonDenominator = incorrectFractions1.GetDenominator();
+                double commonNumerator = incorrectFractions1.numerator + incorrectFractions2.numerator;
+                double commonDenominator = incorrectFractions1.denominator;
                 return (new IncorrectFractions(commonNumerator, commonDenominator));
             }
             else
             {
                 IncorrectFractions incorrectFractions3 = new IncorrectFractions
-                            (incorrectFractions1.GetNumerator() * incorrectFractions2.GetDenominator(), 
-                            incorrectFractions1.GetDenominator() * incorrectFractions2.GetDenominator());
+                            (incorrectFractions1.numerator * incorrectFractions2.denominator, 
+                            incorrectFractions1.denominator * incorrectFractions2.denominator);
                 IncorrectFractions incorrectFractions4 = new IncorrectFractions
-                            (incorrectFractions2.GetNumerator() * incorrectFractions1.GetDenominator(),
-                            incorrectFractions2.GetDenominator() * incorrectFractions1.GetDenominator());
+                            (incorrectFractions2.numerator * incorrectFractions1.denominator,
+                            incorrectFractions2.denominator * incorrectFractions1.denominator);
                 return (incorrectFractions3 + incorrectFractions4);
             }
         }
         public static IncorrectFractions operator -(IncorrectFractions incorrectFractions1, IncorrectFractions incorrectFractions2)
         {
-            if (incorrectFractions1.GetDenominator() == incorrectFractions2.GetDenominator())
+            if (incorrectFractions1.denominator == incorrectFractions2.denominator)
             {
-                double commonNumerator = incorrectFractions1.GetNumerator() - incorrectFractions2.GetNumerator();
-                double commonDenominator = incorrectFractions1.GetDenominator();
+                double commonNumerator = incorrectFractions1.numerator - incorrectFractions2.numerator;
+                double commonDenominator = incorrectFractions1.denominator;
                 return (new IncorrectFractions(commonNumerator, commonDenominator));
             }
             else
             {
                 IncorrectFractions incorrectFractions3 = new IncorrectFractions
-                            (incorrectFractions1.GetNumerator() * incorrectFractions2.GetDenominator(),
-                            incorrectFractions1.GetDenominator() * incorrectFractions2.GetDenominator());
+                            (incorrectFractions1.numerator * incorrectFractions2.denominator,
+                            incorrectFractions1.denominator * incorrectFractions2.denominator);
                 IncorrectFractions incorrectFractions4 = new IncorrectFractions
-                            (incorrectFractions2.GetNumerator() * incorrectFractions1.GetDenominator(),
-                            incorrectFractions2.GetDenominator() * incorrectFractions1.GetDenominator());
-                return (incorrectFractions3 + incorrectFractions4);
+                            (incorrectFractions2.numerator * incorrectFractions1.denominator,
+                            incorrectFractions2.denominator * incorrectFractions1.denominator);
+                return (incorrectFractions3 - incorrectFractions4);
             }
         }
         public static IncorrectFractions operator *(IncorrectFractions incorrectFractions1, IncorrectFractions incorrectFractions2)
         {
-            double commonNumerator = incorrectFractions1.GetNumerator() * incorrectFractions2.GetNumerator();
-            double commonDenominator = incorrectFractions1.GetDenominator() * incorrectFractions2.GetDenominator();
+            double commonNumerator = incorrectFractions1.numerator * incorrectFractions2.numerator;
+            double commonDenominator = incorrectFractions1.denominator * incorrectFractions2.denominator;
             return (new IncorrectFractions(commonNumerator, commonDenominator));
         }
         public static IncorrectFractions operator /(IncorrectFractions incorrectFractions1, IncorrectFractions incorrectFractions2)
         {
-            double commonNumerator = incorrectFractions1.GetNumerator() * incorrectFractions2.GetDenominator();
-            double commonDenominator = incorrectFractions1.GetDenominator() * incorrectFractions2.GetNumerator();
+            double commonNumerator = incorrectFractions1.numerator * incorrectFractions2.denominator;
+            double commonDenominator = incorrectFractions1.denominator * incorrectFractions2.numerator;
             return (new IncorrectFractions(commonNumerator, commonDenominator));
         }
 
         //Задание 3
         public String GetADrSign()
         {
-            if (this.GetNumerator() * this.GetDenominator() > 0)
+            if (this.numerator * this.denominator > 0)
             {
                 return ("+");
             }
@@ -133,32 +137,32 @@ namespace Домашняя_работа_от_28._09._2021
         public void  NewNumerator(double numerator)
         {
             RepFanN(this, numerator);
-            this.fraction = (numerator + "/" + this.GetDenominator()).ToString();
+            this.numerator = numerator;
         }
         public void  NewDenominator(double denominator)
         {
             RepFanD(this, denominator);
-            this.fraction = (this.GetNumerator() + "/" + denominator).ToString();
+            this.denominator = denominator;
         }
         //Задание 5
         public double GetTheIndexOfTheNumeratorAndDenominator(IncorrectFractions incorrectFractions, int index)
         {
-            List<double> fractions = new List<double> { this.GetNumerator(), this.GetDenominator() };
+            List<double> fractions = new List<double> { this.numerator, this.denominator };
             return (fractions[index]);
         }
 
         //Вспомогадельно
         public String GetFraction()
         {
-            return fraction;
+            return numerator +"/"+ denominator;
         }
         public double GetNumerator()
         {
-            return (Convert.ToDouble(this.fraction.Split("/")[0]));
+            return (this.numerator);
         }
         public double GetDenominator()
         {
-            return (Convert.ToDouble(this.fraction.Split("/")[1]));
+            return (this.denominator);
         }
     }
 }
