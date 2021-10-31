@@ -7,11 +7,11 @@ namespace HomeWork2
     {
         static void Main(string[] args)
         {
-            PersonnelOfficer personnelOfficer = new PersonnelOfficer();
+            PersonnelOfficer personnelOfficer = new PersonnelOfficer("Илья0", "Васильевич0", "Дробышевский0");
             Student stud1 = personnelOfficer.MakeStudent("Илья", "Васильевич", "Дробышевский");
-            Student stud2 = personnelOfficer.MakeStudent();
-            Student stud3 = personnelOfficer.MakeStudent();
-            Teacher teacher = personnelOfficer.MakeTeacher("Илья1", "Васильевич1", "Дробышевский1");
+            Student stud2 = personnelOfficer.MakeStudent("Илья1", "Васильеви1", "Дробышевски1");
+            Student stud3 = personnelOfficer.MakeStudent("Илья2", "Васильевич2", "Дробышевский2");
+            Teacher teacher = personnelOfficer.MakeTeacher("Илья3", "Васильевич3", "Дробышевский3");
 
             Group group = personnelOfficer.MakeGroup();
             group.SetTeacher(teacher);
@@ -22,17 +22,19 @@ namespace HomeWork2
             group.AddStudent(stud2);
             group.AddStudent(stud3);
 
-            Console.WriteLine(stud1.GetAllFIO());
-            Console.WriteLine(stud2.GetGroup());
+            Console.WriteLine(personnelOfficer.GetAllFIO());
+            Console.WriteLine(teacher.GetAllFIO());
+            Console.WriteLine(stud3.GetAllFIO());
+
+            Console.WriteLine(stud3.GetGroup());
+            Console.WriteLine(personnelOfficer.Post);
+            Console.WriteLine(teacher.Post);
             Console.WriteLine(group.GetNumber());
-            stud1.Deducted();
+            stud2.Deducted();
             Console.WriteLine(group.GetNumber());
             Console.WriteLine(teacher.Lecture);
-            Console.WriteLine(teacher.GetAllFIO());
-
-            teacher.Post = "Математик";
-            teacher.Post = "Физик";
-            Console.WriteLine(teacher.Post);
+            teacher.Lectured();
+            Console.WriteLine(teacher.Lecture);
         }
     }
     public class Group
@@ -91,7 +93,7 @@ namespace HomeWork2
         private string middlename;
         private string surname;
 
-        public Human(string name = null, string middlename = null, string surname = null)
+        public Human(string name, string middlename, string surname)
         {
             this.name = name;
             this.surname = surname;
@@ -113,33 +115,33 @@ namespace HomeWork2
     }
     public abstract class Worker : Human
     {
-        public Worker(string name = null, string middlename = null, string surname = null) : base(name, middlename, surname) { }
+        public Worker(string name, string middlename, string surname, string post) : base(name, middlename, surname) 
+        {
+            this.post = post;
+        }
         private string post;
-
         public string Post
         {
             get
             {
-                return (post);
-            }
-            set
-            {
-                if (this.post == null) this.post = value;
+                return(this.post);
             }
         }
     }
 
     public class PersonnelOfficer : Worker
     {
+        public PersonnelOfficer(string name, string middlename, string surname) 
+            : base(name, middlename, surname, "Кадровик") { }
         public void AddStudent(Group group, Student student)
         {
             group.AddStudent(student);
         }
-        public Student MakeStudent(string name = null, string middlename = null, string surname = null)
+        public Student MakeStudent(string name, string middlename, string surname)
         {
             return (new Student(name, middlename, surname));
         }
-        public Teacher MakeTeacher(string name = null, string middlename = null, string surname = null)
+        public Teacher MakeTeacher(string name, string middlename, string surname)
         {
             return (new Teacher(name, middlename, surname));
         }
@@ -151,7 +153,8 @@ namespace HomeWork2
 
     public class Teacher : Worker
     {
-        public Teacher(string name = null, string middlename = null, string surname = null) : base (name, middlename, surname) { }
+        public Teacher(string name, string middlename, string surname) 
+            : base (name, middlename, surname, "Препод") { }
         private int lecture;
         private Group group = null;
         public int Lecture
@@ -176,7 +179,7 @@ namespace HomeWork2
     }
     public class Student : Human
     {
-        public Student(string name = null, string middlename = null, string surname = null) : base(name, middlename, surname) { }
+        public Student(string name, string middlename, string surname) : base(name, middlename, surname) { }
         public Group group;
         public bool studies = true;
 
