@@ -6,28 +6,37 @@ namespace HomeWork3
     {
         static void Main(string[] args)
         {
-            CollectionClass collection = new CollectionClass();
-            for (int i = 0; i < 16; i++) collection.Add(i + 1);
-            Console.WriteLine(collection.GetIndex(4));
-            Console.WriteLine(collection.GetElement(14));
-
-            for (int i = 0; i < 16; i++) Console.Write(collection.GetElement(i));
-            collection.RemoveAt(5);
+            CollectionClass<int> collection1 = new CollectionClass<int>();
+            for (int i = 0; i < 16; i++) collection1.Add(i + 1);
+            Console.WriteLine(collection1.GetIndex(3));
+            for (int i = 0; i < 16; i++) Console.Write(collection1.GetElement(i));
+            collection1.RemoveAt(0);
             Console.WriteLine();
-            for (int i = 0; i < 15; i++) Console.Write(collection.GetElement(i));
+            Console.WriteLine(collection1.GetElement(3).GetType());
+            for (int i = 0; i < 15; i++) Console.Write(collection1.GetElement(i));
+
+            CollectionClass<string> collection2 = new CollectionClass<string>();
+            for (int i = 0; i < 16; i++) collection2.Add((i + 1).ToString());
+            Console.WriteLine(collection2.GetIndex(6.ToString()) + " ");
+            Console.WriteLine(collection2.GetElement(14));
+            for (int i = 0; i < 16; i++) Console.Write(collection2.GetElement(i));
+            collection2.RemoveAt(15);
+            Console.WriteLine();
+            Console.WriteLine(collection2.GetElement(3).GetType());
+            for (int i = 0; i < 15; i++) Console.Write(collection2.GetElement(i));
         }
     }
 
-    class CollectionClass
+    class CollectionClass<Type>
     {
         class Collection
         {
-            public int content;
+            public Type content;
             public Collection NextCollection;
         }
         Collection initialvalue = null;
         
-        public void Add(int element)
+        public void Add(Type element)
         {
             Collection collection = new Collection();
             collection.content = element;
@@ -44,11 +53,11 @@ namespace HomeWork3
             initialvalue1.NextCollection = collection;
             return;
         }
-        public int GetIndex(int element)
+        public int GetIndex(Type element)
         {
             Collection initialvalue1 = initialvalue;
             int i = 0;
-            while(element != initialvalue1.content)
+            while(element.GetType() != initialvalue1.content.GetType())
             {
                 if(initialvalue1.NextCollection == null)
                 {
@@ -59,7 +68,7 @@ namespace HomeWork3
             }
             return (i);
         }
-        public int GetElement(int index)
+        public Type GetElement(int index)
         {
             Collection initialvalue1 = initialvalue;
             for (int i = 0; i < index; i++)
@@ -70,11 +79,15 @@ namespace HomeWork3
         }
         public void RemoveAt(int index)
         {
-            Collection initialvalue1 = initialvalue;
-            for (int i = 0; i < index - 1; i++) initialvalue1 = initialvalue1.NextCollection;
-            Collection initialvalue2 = initialvalue1.NextCollection;
-            Collection initialvalue3 = initialvalue2.NextCollection;
-            initialvalue1.NextCollection = initialvalue3;
+            if (index == 0) initialvalue = initialvalue.NextCollection;
+            else
+            {
+                Collection initialvalue1 = initialvalue;
+                for (int i = 0; i < index - 1; i++) initialvalue1 = initialvalue1.NextCollection;
+                Collection initialvalue2 = initialvalue1.NextCollection;
+                Collection initialvalue3 = initialvalue2.NextCollection;
+                initialvalue1.NextCollection = initialvalue3;
+            }
         }
     }
 }
