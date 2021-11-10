@@ -8,21 +8,18 @@ namespace HomeWork3
         {
             CollectionClass<int> collection1 = new CollectionClass<int>();
             for (int i = 0; i < 16; i++) collection1.Add(i + 1);
-            Console.WriteLine(collection1.GetIndex(3));
-            for (int i = 0; i < 16; i++) Console.Write(collection1.GetElement(i));
-            collection1.RemoveAt(0);
             Console.WriteLine();
-            Console.WriteLine(collection1.GetElement(3).GetType());
+            Console.WriteLine(collection1.GetElement(3));
+            Console.WriteLine(collection1.GetIndex(12));
+            collection1.RemoveAt(15);
             for (int i = 0; i < 15; i++) Console.Write(collection1.GetElement(i));
 
             CollectionClass<string> collection2 = new CollectionClass<string>();
             for (int i = 0; i < 16; i++) collection2.Add((i + 1).ToString());
-            Console.WriteLine(collection2.GetIndex(6.ToString()) + " ");
-            Console.WriteLine(collection2.GetElement(14));
-            for (int i = 0; i < 16; i++) Console.Write(collection2.GetElement(i));
-            collection2.RemoveAt(15);
             Console.WriteLine();
-            Console.WriteLine(collection2.GetElement(3).GetType());
+            Console.WriteLine(collection2.GetElement(3));
+            Console.WriteLine(collection2.GetIndex("15"));
+            collection2.RemoveAt(0);
             for (int i = 0; i < 15; i++) Console.Write(collection2.GetElement(i));
         }
     }
@@ -57,7 +54,7 @@ namespace HomeWork3
         {
             Collection initialvalue1 = initialvalue;
             int i = 0;
-            while(element.GetType() != initialvalue1.content.GetType())
+            while(element.ToString() != initialvalue1.content.ToString())
             {
                 if(initialvalue1.NextCollection == null)
                 {
@@ -85,8 +82,8 @@ namespace HomeWork3
                 Collection initialvalue1 = initialvalue;
                 for (int i = 0; i < index - 1; i++) initialvalue1 = initialvalue1.NextCollection;
                 Collection initialvalue2 = initialvalue1.NextCollection;
-                Collection initialvalue3 = initialvalue2.NextCollection;
-                initialvalue1.NextCollection = initialvalue3;
+                initialvalue2 = initialvalue2.NextCollection;
+                initialvalue1.NextCollection = initialvalue2;
             }
         }
     }
