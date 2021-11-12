@@ -7,22 +7,23 @@ namespace HomeWork3
         static void Main(string[] args)
         {
             Random random = new Random();
+
             CollectionClass<int> collection1 = new CollectionClass<int>();
-            //for (int i = 0; i < 16; i++) collection1.Add(i + 1);
-            Console.WriteLine(collection1.Length);
-            //Console.WriteLine(collection1.GetElement(3));
-            //Console.WriteLine(collection1.GetIndex(12));
-            collection1.RemoveAt(random.Next(32));
-            //for (int i = 0; i < 15; i++) Console.Write(collection1.GetElement(i));
+            Console.WriteLine(collection1.GetIndex(34));
+            for (int i = 0; i < 16; i++) collection1.Add(i+1);
+            Console.WriteLine(collection1.GetIndex(random.Next(-32, 17)));
+            Console.WriteLine(collection1.GetElement(5));
+            collection1.RemoveAt(random.Next(-1, 17));
+            for (int i = 0; i < 15; i++) Console.Write(collection1.GetElement(i));
+
             Console.WriteLine();
-            Console.WriteLine(collection1.Length);
 
             CollectionClass<string> collection2 = new CollectionClass<string>();
+            Console.WriteLine(collection2.GetIndex("45"));
             for (int i = 0; i < 16; i++) collection2.Add((i + 1).ToString());
-            Console.WriteLine();
-            //Console.WriteLine(collection2.GetElement(3));
-            //Console.WriteLine(collection2.GetIndex("15"));
-            collection2.RemoveAt(random.Next(32));
+            Console.WriteLine(collection2.GetIndex("4"));
+            Console.WriteLine(collection2.GetElement(5));
+            collection2.RemoveAt(random.Next(-1, 17));
             for (int i = 0; i < 15; i++) Console.Write(collection2.GetElement(i));
         }
     }
@@ -57,35 +58,43 @@ namespace HomeWork3
         }
         public int GetIndex(Type element)
         {
-            Collection initialvalue1 = initialvalue;
-            int i = 0;
-            while (element.ToString() != initialvalue1.content.ToString())
+            if (initialvalue != null)
             {
-                if (initialvalue1.NextCollection == null)
+                Collection initialvalue1 = initialvalue;
+                int i = 0;
+                while (element.ToString() != initialvalue1.content.ToString())
                 {
-                    return (-1);
+                    if (initialvalue1.NextCollection == null)
+                    {
+                        return (-1);
+                    }
+                    initialvalue1 = initialvalue1.NextCollection;
+                    i = i + 1;
                 }
-                initialvalue1 = initialvalue1.NextCollection;
-                i = i + 1;
+                return (i);
             }
-            return (i);
+            else return (-1);
         }
         public Type GetElement(int index)
         {
-            Collection initialvalue1 = initialvalue;
-            if (length >= index & 0 <= index)
-            {
-                for (int i = 0; i < index; i++)
+            if (initialvalue != null) {
+                Collection initialvalue1 = initialvalue;
+                if (length >= index & 0 <= index)
                 {
-                    initialvalue1 = initialvalue1.NextCollection;
+                    for (int i = 0; i < index; i++)
+                    {
+                        initialvalue1 = initialvalue1.NextCollection;
+                    }
+                    return (initialvalue1.content);
                 }
-                return (initialvalue1.content);
+                else throw new Exception("Значение индекса не соответствует длине массива! :(");
             }
-            else throw new Exception("Значение индекса не соответствует длине массива! :(");
+            else throw new Exception("Массив пустой."); ;
         }
         public void RemoveAt(int index)
         {
-            if (length >= index & 0 <= index & initialvalue != null)
+            //Console.WriteLine((length >= index & 0 <= index) & initialvalue != null);
+            if ((length >= index & 0 <= index) & initialvalue != null)
             {
                 length = length - 1;
                 if (index == 0) initialvalue = initialvalue.NextCollection;
