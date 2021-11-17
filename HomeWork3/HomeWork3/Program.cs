@@ -14,7 +14,7 @@ namespace HomeWork3
             Console.WriteLine(collection1.GetIndex(random.Next(-32, 17)));
             Console.WriteLine(collection1.GetElement(5));
             collection1.RemoveAt(random.Next(-1, 17));
-            for (int i = 0; i < 15; i++) Console.Write(collection1.GetElement(i));
+            for (int i = 0; i < 15; i++) Console.Write(collection1[i]);
 
             Console.WriteLine();
 
@@ -24,7 +24,7 @@ namespace HomeWork3
             Console.WriteLine(collection2.GetIndex("4"));
             Console.WriteLine(collection2.GetElement(5));
             collection2.RemoveAt(random.Next(-1, 17));
-            for (int i = 0; i < 15; i++) Console.Write(collection2.GetElement(i));
+            for (int i = 0; i < 15; i++) Console.Write(collection2[i]);
         }
     }
 
@@ -93,8 +93,7 @@ namespace HomeWork3
         }
         public void RemoveAt(int index)
         {
-            //Console.WriteLine((length >= index & 0 <= index) & initialvalue != null);
-            if ((length >= index & 0 <= index) & initialvalue != null)
+            if ((length > index & 0 <= index) & initialvalue != null)
             {
                 length = length - 1;
                 if (index == 0) initialvalue = initialvalue.NextCollection;
@@ -112,6 +111,21 @@ namespace HomeWork3
         public int Length
         {
             get { return length; }
+        }
+        public Type this[int index]
+        {
+            get
+            {
+                Collection initialvalue1 = initialvalue;
+                for (int i = 0; i < index; i++) initialvalue1 = initialvalue1.NextCollection;
+                return (initialvalue1.content);
+            }
+            set
+            {
+                Collection initialvalue1 = initialvalue;
+                for (int i = 0; i < index; i++) initialvalue1 = initialvalue1.NextCollection;
+                initialvalue1.content = value;
+            }
         }
     }
 }
