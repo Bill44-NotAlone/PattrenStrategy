@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HomeWork4
 {
@@ -7,14 +8,9 @@ namespace HomeWork4
         static void Main(string[] args)
         {
             Random random = new Random();
-            double[][] matrix = new double[3][];
-            for (int i = 0; i < 3; i++)
-            {
-                double[] list = new double[] {random.Next(12), random.Next(12), random.Next(12)};
-                Console.WriteLine(list[0] + " " + list[1] + " " + list[2]) ;
-                matrix[i] = list;
-            }
-            Console.WriteLine(Matrix.GetM(matrix));
+            List<double> number = new List<double>() {1, -1};
+            for(int i = 0; i < number.Count; i++)
+            Console.WriteLine(Sort.Pus(number)[i]);
         }
     }
     public class Matrix
@@ -56,6 +52,26 @@ namespace HomeWork4
                 }
                 return Returning;
             }
+        }
+    }
+
+    public partial class Sort
+    {
+        public static List<double> Pus(List<double> M)
+        {
+            for (int i = 0; i < M.Count - 1; i++)
+            {
+                for (int j = M.Count - 2; j > i - 1; j--)
+                {
+                    if (M[j] > M[j + 1])
+                    {
+                        double C = M[j];
+                        M[j] = M[j + 1];
+                        M[j + 1] = C;
+                    }
+                }
+            }
+            return M;
         }
     }
 }
