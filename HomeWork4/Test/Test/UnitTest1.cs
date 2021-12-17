@@ -1,5 +1,6 @@
 using Lib1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace Test
@@ -7,29 +8,34 @@ namespace Test
     [TestClass]
     public class UnitTest1
     {
-        List<double> list1 = new List<double>();
-        List<double> list2 = new List<double>() { 1 };
-        List<double> list3 = new List<double>() { 2, 1 };
-        List<double> list4 = new List<double>() { 1, 2};
+        List<double> listTR11 = new List<double>();
+        List<double> listTR12 = new List<double>() { 1 };
+        List<double> listTR21 = new List<double>() { 1, 2 };
+        List<double> listTR31 = new List<double>() { 2, 1, 4, 3 };
+        List<double> listTR32 = new List<double>() { 7, 2, 1, 7, 3, 6, 7 };
         [TestMethod]
-        public void TestMethod1()
+        public void TestMethodTR11()
         {
-            Assert.ReferenceEquals(new List<double>() {}, Class1.Pus(list1));
+            Assert.ReferenceEquals(new List<double>() { }, Class1.Pus(listTR11));
         }
         [TestMethod]
-        public void TestMethod2()
+        public void TestMethodTR12()
         {
-            Assert.ReferenceEquals(new List<double>() { 1 }, Class1.Pus(list2));
+            Assert.ReferenceEquals(new List<double>() { 1 }, Class1.Pus(listTR12));
         }
         [TestMethod]
-        public void TestMethod3()
-        { 
-            Assert.ReferenceEquals(new List<double>() { 1, 2 }, Class1.Pus(list3));
+        public void TestMethodTR21()
+        {
+            Assert.ReferenceEquals(new List<double>() { 1, 2 }, Class1.Pus(listTR21));
         }
         [TestMethod]
-        public void TestMethod4()
+        public void TestMethodTR31()
         {
-            Assert.ReferenceEquals(new List<double>() { 1, 2 }, Class1.Pus(list3));
+            Assert.ReferenceEquals(new List<double>() { 1, 2, 3, 4 }, Class1.Pus(listTR31));
+        }
+        public void TestMethodTR32()
+        {
+            Assert.ReferenceEquals(new List<double>() { 1, 2, 3, 6, 7, 7, 7}, Class1.Pus(listTR32));
         }
     }
 }

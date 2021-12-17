@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lib1;
+using System;
 using System.Collections.Generic;
 
 namespace HomeWork4
@@ -6,57 +7,36 @@ namespace HomeWork4
     class Program
     {
         static void Main(string[] args)
-        {
-            Random random = new Random();
-            List<double> number = new List<double>() {1, -1};
-            for(int i = 0; i < number.Count; i++)
-            Console.WriteLine(Sort.Pus(number)[i]);
-        }
-    }
-    public class Matrix
-    {
-        public static double GetM(double[][] Matrix)
-        {
-            {
-                double Returning;
-                if (Matrix.Length == 2)
-                {
-                    Returning = (Matrix[0][0] * Matrix[1][1]) - (Matrix[0][1] * Matrix[1][0]);
-                }
-                else
-                {
-                    double[][] Minor = new double[Matrix.Length - 1][]; //минор, но возможно, что это матрица n-ого порядка
-                    int i, j, k;
-                    short Minus = 1;
-                    double Temp;
-                    Returning = 0;
-                    for (i = 0; i < Matrix.Length; i++)
-                    {
-                        for (j = 1; j < Matrix.Length; j++) //сохраняю значения для "возможно" минора
-                        {
-                            Minor[j - 1] = new double[Matrix.Length - 1];
-                            for (k = 0; k < i; k++) //значения до диагонали
-                                Minor[j - 1][k] = Matrix[j][k];
+        { 
+            List<double> number1 = new List<double>() {};
+            Console.WriteLine("Тест 1");
+            for(int i = 0; i < number1.Count; i++)
+                Console.WriteLine(Class1.Pus(number1)[i]);
 
-                            for (k++; k < Matrix.Length; k++)   //значения после диагонали
-                                Minor[j - 1][k - 1] = Matrix[j][k];
-                        }
-                        Temp = GetM(Minor);
-                        Temp = Matrix[0][i] * Minus * Temp;
-                        Returning += Temp;
-                        if (Minus > 0)  //меняю знак, согласно правилам
-                            Minus = -1;
-                        else
-                            Minus = 1;
-                    }
-                }
-                return Returning;
-            }
-        }
-    }
+            List<double> number2 = new List<double>() {1};
+            Console.WriteLine("Тест 2");
+            for (int i = 0; i < number2.Count; i++)
+                Console.WriteLine(Class1.Pus(number2)[i]);
 
-    public partial class Sort
-    {
-        
+            List<double> number3 = new List<double>() {1,2,3,4};
+            Console.WriteLine("Тест 3");
+            for (int i = 0; i < number3.Count; i++)
+                Console.WriteLine(Class1.Pus(number3)[i]);
+
+            List<double> number4 = new List<double>() {2,1,4,3};
+            Console.WriteLine("Тест 4");
+            for (int i = 0; i < number4.Count; i++)
+                Console.WriteLine(Class1.Pus(number4)[i]);
+
+            List<double> number5 = new List<double>() {7,2,1,7,3,6,7};
+            Console.WriteLine("Тест 5");
+            for (int i = 0; i < number5.Count; i++)
+                Console.WriteLine(Class1.Pus(number5)[i]);
+
+            List<double> number6 = new List<double>() { -1,1};
+            Console.WriteLine("Тест 6");
+            for (int i = 0; i < number6.Count; i++)
+                Console.WriteLine(Class1.Pus(number6)[i]);
+        }
     }
 }
