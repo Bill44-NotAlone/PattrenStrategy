@@ -28,7 +28,9 @@ namespace Домашняя_работа_от_28._09._2021
             incorrectFractions.NewNumerator(7);
             incorrectFractions.NewDenominator(8);
             Console.WriteLine(incorrectFractions.GetFraction());
-            Console.WriteLine(incorrectFractions.GetTheIndexOfTheNumeratorAndDenominator(incorrectFractions, 0));
+            Console.WriteLine(incorrectFractions[0]);
+            Console.WriteLine(incorrectFractions[1]);
+            Console.WriteLine(incorrectFractions[2]);
         }
         public static void RepfanConsoleN(IncorrectFractions incorrectFractions, double int2)
         {
@@ -149,6 +151,21 @@ namespace Домашняя_работа_от_28._09._2021
         {
             List<double> fractions = new List<double> { this.numerator, this.denominator };
             return (fractions[index]);
+        }
+        public double this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case (0):
+                        return numerator;
+                    case (1):
+                        return denominator;
+                    default:
+                        return -1;
+                }
+            }
         }
 
         //Вспомогадельно
