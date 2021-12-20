@@ -13,12 +13,12 @@ namespace HomeWork4
             for(int i = 0; i < number1.Count; i++)
                 Console.WriteLine(Class1.Pus(number1)[i]);
 
-            List<double> number2 = new List<double>() {1};
+            List<double> number2 = new List<double>() {1, 2};
             Console.WriteLine("Тест 2");
             for (int i = 0; i < number2.Count; i++)
                 Console.WriteLine(Class1.Pus(number2)[i]);
 
-            List<double> number3 = new List<double>() {1,2,3,4};
+            List<double> number3 = new List<double>() {1,2,3,-4};
             Console.WriteLine("Тест 3");
             for (int i = 0; i < number3.Count; i++)
                 Console.WriteLine(Class1.Pus(number3)[i]);
