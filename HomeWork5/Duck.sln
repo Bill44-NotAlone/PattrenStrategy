@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duck", "Duck.csproj", "{29A0EE24-E81A-40CC-804C-26F45B979E5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Duck", "Duck.csproj", "{29A0EE24-E81A-40CC-804C-26F45B979E5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ducks", "..\Ducks\Ducks.csproj", "{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{29A0EE24-E81A-40CC-804C-26F45B979E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29A0EE24-E81A-40CC-804C-26F45B979E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29A0EE24-E81A-40CC-804C-26F45B979E5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

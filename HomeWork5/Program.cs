@@ -1,42 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ducks;
 
-namespace Duck
+namespace SpaceDuck
 {
     class Program
     {
         static void Main(string[] args)
         {
-            List<Duck> ducks = new List<Duck>() { new RedheadDuck(), new MallardDuck() };
-            foreach(Duck duck in ducks) Console.WriteLine(duck.Quack()+" "+duck.Swim()+" "+duck.Display());
-            
-        }
-    }
+            List<Duck> ducks = new List<Duck>() {
+                new RedheadDuck(), 
+                new MallardDuck(), 
+                new DecoyDuck(), 
+                new RubberDuck()
+            };
 
-    public abstract class Duck
-    {
-        public string Quack()
-        {
-            return "Quack " + this.GetType();
-        }
-        public string Swim()
-        {
-            return "Swim " + this.GetType();
-        }
-        public abstract string Display();
-    }
-    public class MallardDuck : Duck
-    {
-        public override string Display()
-        {
-            return "Display " + this.GetType();
-        }
-    }
-    public class RedheadDuck : Duck
-    {
-        public override string Display()
-        {
-            return "Display " + this.GetType();
+            for (int i = 0; i< ducks.Count; i++) 
+            {
+                Duck duck = ducks[i];
+                Console.WriteLine(duck.Display());
+                if (duck is RedheadDuck)
+                {
+                    RedheadDuck redheadDuck = duck as RedheadDuck;
+                    Console.WriteLine(redheadDuck.Display());
+                    Console.WriteLine(redheadDuck.Fly());
+                    Console.WriteLine(redheadDuck.Quack());
+                }
+                if (duck is MallardDuck)
+                {
+                    MallardDuck mallardDuck = duck as MallardDuck;
+                    Console.WriteLine(mallardDuck.Display());
+                    Console.WriteLine(mallardDuck.Fly());
+                    Console.WriteLine(mallardDuck.Quack());
+                }
+            }
         }
     }
 }
