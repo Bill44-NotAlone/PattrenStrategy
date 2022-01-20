@@ -15,7 +15,12 @@ namespace Ducks
 
         public string Fly()
         {
-            return "Flyable" + this.GetType();
+            return "Flyable " + this.GetType();
+        }
+
+        public string Quack()
+        {
+            return "Quack " + this.GetType();
         }
     }
 }

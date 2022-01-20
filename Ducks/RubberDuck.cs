@@ -10,7 +10,12 @@ namespace Ducks
     {
         public override string Display()
         {
-            return "Display" + this.GetType();
+            return "Display " + this.GetType();
+        }
+
+        public string Quack()
+        {
+            return "Quack " + this.GetType();
         }
     }
 }

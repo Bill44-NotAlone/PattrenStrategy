@@ -8,10 +8,6 @@ namespace Ducks
 {
     public abstract class Duck
     {
-        public string Quack()
-        {
-            return "Quack " + this.GetType();
-        }
         public string Swim()
         {
             return "Swim " + this.GetType();

@@ -19,19 +19,17 @@ namespace SpaceDuck
             {
                 Duck duck = ducks[i];
                 Console.WriteLine(duck.Display());
-                if (duck is RedheadDuck)
+                if (duck is Quackable)
                 {
-                    RedheadDuck redheadDuck = duck as RedheadDuck;
-                    Console.WriteLine(redheadDuck.Display());
-                    Console.WriteLine(redheadDuck.Fly());
-                    Console.WriteLine(redheadDuck.Quack());
+                    Console.WriteLine((duck as Quackable).Quack());
                 }
-                if (duck is MallardDuck)
+                if (duck is Flyable)
                 {
-                    MallardDuck mallardDuck = duck as MallardDuck;
-                    Console.WriteLine(mallardDuck.Display());
-                    Console.WriteLine(mallardDuck.Fly());
-                    Console.WriteLine(mallardDuck.Quack());
+                    Console.WriteLine((duck as Flyable).Fly());
+                }
+                if(duck is MallardDuck)
+                {
+                    Console.WriteLine((duck as MallardDuck).Swim());
                 }
             }
         }
