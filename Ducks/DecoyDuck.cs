@@ -8,9 +8,10 @@ namespace Ducks
 {
     public class DecoyDuck : Duck
     {
-        public override string Display()
+        public DecoyDuck()
         {
-            return "Display " + this.GetType();
+            flyable = new FlyNoWay();
+            quackable = new MuteQuack();
         }
     }
 }

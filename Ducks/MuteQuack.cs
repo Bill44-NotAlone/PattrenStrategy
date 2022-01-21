@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ducks
 {
-    public interface Flyable
+    public class MuteQuack : IQuackable
     {
-        string Fly();
+        public string Quack()
+        {
+            return "";
+        }
     }
 }

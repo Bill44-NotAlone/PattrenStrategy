@@ -19,18 +19,9 @@ namespace SpaceDuck
             {
                 Duck duck = ducks[i];
                 Console.WriteLine(duck.Display());
-                if (duck is Quackable)
-                {
-                    Console.WriteLine((duck as Quackable).Quack());
-                }
-                if (duck is Flyable)
-                {
-                    Console.WriteLine((duck as Flyable).Fly());
-                }
-                if(duck is MallardDuck)
-                {
-                    Console.WriteLine((duck as MallardDuck).Swim());
-                }
+                Console.WriteLine(duck.Quack());
+                Console.WriteLine(duck.Fly());
+                Console.WriteLine(duck.Swim());
             }
         }
     }
