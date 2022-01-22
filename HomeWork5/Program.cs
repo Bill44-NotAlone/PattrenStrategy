@@ -23,6 +23,14 @@ namespace SpaceDuck
                 Console.WriteLine(duck.Fly());
                 Console.WriteLine(duck.Swim());
             }
+            Console.WriteLine("=");
+            Console.WriteLine("=");
+            MallardDuck mallard = (MallardDuck)ducks[1];
+            Console.WriteLine(mallard.Quack());
+            mallard.SetQuackBehavir(new MuteQuack());
+            Console.WriteLine(mallard.Quack());
+            mallard.SetQuackBehavir(new Squeak());
+            Console.WriteLine(mallard.Quack());
         }
     }
 }

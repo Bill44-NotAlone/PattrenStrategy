@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ducks
 {
-    public class DQuack : IQuackable
+    public class DQuack : IQuackBehavior
+
     {
         public string Quack()
         {
