@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Ducks;
 
-namespace SpaceDuck
+namespace DuckProg
 {
     class Program
     {
@@ -31,6 +31,8 @@ namespace SpaceDuck
             Console.WriteLine(mallard.Quack());
             mallard.SetQuackBehavir(new Squeak());
             Console.WriteLine(mallard.Quack());
+
+            Console.ReadKey();
         }
     }
 }

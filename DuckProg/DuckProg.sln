@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Duck", "Duck.csproj", "{29A0EE24-E81A-40CC-804C-26F45B979E5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuckProg", "DuckProg\DuckProg.csproj", "{A934E144-46D1-4021-8FBF-1A317BADAAC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ducks", "..\Ducks\Ducks.csproj", "{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}"
 EndProject
@@ -13,10 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29A0EE24-E81A-40CC-804C-26F45B979E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29A0EE24-E81A-40CC-804C-26F45B979E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29A0EE24-E81A-40CC-804C-26F45B979E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29A0EE24-E81A-40CC-804C-26F45B979E5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A934E144-46D1-4021-8FBF-1A317BADAAC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A934E144-46D1-4021-8FBF-1A317BADAAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A934E144-46D1-4021-8FBF-1A317BADAAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A934E144-46D1-4021-8FBF-1A317BADAAC3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F67F4C4-B5E4-4B49-AEBA-2C468E79B8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F2A6F48D-21C4-407B-B8F8-7D489E521F9D}
+		SolutionGuid = {C84772CA-5F23-4A3D-9DEE-F66B3DD0710A}
 	EndGlobalSection
 EndGlobal
